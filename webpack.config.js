@@ -13,22 +13,23 @@ module.exports = {
     compress: true,
     port: 3000,
   },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          },
+        test: /\.(js|mjs|ts)$/,
+        loader: require.resolve("babel-loader"),
+        exclude: /node_modules/,
+        options: {
+          presets: [require.resolve("@babel/preset-typescript")],
         },
       },
-      { loader: "ts-loader" },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
     ],
-  },
-  resolve: {
-    extensions: [".ts", ".js"],
   },
 };
