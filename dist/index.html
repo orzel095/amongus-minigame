@@ -5,7 +5,29 @@
     <title>Freshmail Game</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div class="wrapper">
+      <div class="preview"></div>
+      <div class="board"></div>
+    </div>
+    <div class="actions">
+      <label for="steps">Liczba kroków</label>
+      <select id="steps">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5" selected>5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+      <div class="actions-btns">
+        <button type="button" class="play-btn">play</button>
+        <button type="button" class="reset-btn">reset</button>
+      </div>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
