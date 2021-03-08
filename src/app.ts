@@ -34,7 +34,7 @@ let isComputerPlay = false;
 
 const boxes = getGeneratedBoxes(gridSize);
 
-boxes.forEach((node) => {
+boxes.forEach((node: HTMLElement) => {
   computerBoard?.appendChild(node.cloneNode());
   playerBoard?.appendChild(node.cloneNode());
 });
@@ -44,7 +44,7 @@ const createScores = () => {
   if (playerScore) playerScore.innerHTML = "";
 
   const scores = getGeneratedScores(maxSteps);
-  scores.forEach((node) => {
+  scores.forEach((node: HTMLElement) => {
     computerScore?.appendChild(node.cloneNode());
     playerScore?.appendChild(node.cloneNode());
   });
