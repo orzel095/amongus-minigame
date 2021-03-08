@@ -1,13 +1,13 @@
 {
-  "name": "freshmail-game",
+  "name": "amongus-minigame",
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "homepage": "https://github.com/orzel095/freshmail-game",
+  "homepage": "https://github.com/orzel095/amongus-minigame",
   "author": "Mateusz Orlowski",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/orzel095/freshmail-game/issues"
+    "url": "https://github.com/orzel095/amongus-minigame/issues"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/orzel095/freshmail-game.git"
+    "url": "git+https://github.com/orzel095/amongus-minigame.git"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",
