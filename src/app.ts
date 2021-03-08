@@ -2,8 +2,8 @@ import {
   getGeneratedBoxes,
   getComputerCombination,
   boxAnimation,
-  updateScore,
   setPlayerBoxes,
+  getGeneratedScores,
 } from "./utils/index";
 import "./styles/index.css";
 //@ts-ignore
@@ -15,8 +15,14 @@ const selectElement: HTMLSelectElement | null = document.querySelector(
 );
 const playBtn: HTMLButtonElement | null = document.querySelector(".play-btn");
 const resetBtn: HTMLButtonElement | null = document.querySelector(".reset-btn");
-const computerBoard: HTMLElement | null = document.querySelector(".computer-board");
+const computerBoard: HTMLElement | null = document.querySelector(
+  ".computer-board"
+);
 const playerBoard: HTMLElement | null = document.querySelector(".player-board");
+const computerScore: HTMLElement | null = document.querySelector(
+  ".computer-score"
+);
+const playerScore: HTMLElement | null = document.querySelector(".player-score");
 
 //setting game
 
@@ -33,6 +39,19 @@ boxes.forEach((node) => {
   playerBoard?.appendChild(node.cloneNode());
 });
 
+const createScores = () => {
+  if (computerScore) computerScore.innerHTML = "";
+  if (playerScore) playerScore.innerHTML = "";
+
+  const scores = getGeneratedScores(maxSteps);
+  scores.forEach((node) => {
+    computerScore?.appendChild(node.cloneNode());
+    playerScore?.appendChild(node.cloneNode());
+  });
+};
+
+createScores();
+
 let computerCombination = getComputerCombination(gridSize, maxSteps);
 
 const computerBoxes: NodeListOf<HTMLElement> = document.querySelectorAll(
@@ -43,6 +62,24 @@ const playerBoxes: NodeListOf<HTMLElement> = document.querySelectorAll(
 );
 
 // helpers
+
+const updateScore = () => {
+  createScores();
+  const computerScores: NodeListOf<HTMLElement> = document.querySelectorAll(
+    ".computer-score .score-box"
+  );
+  const playerScores: NodeListOf<HTMLElement> = document.querySelectorAll(
+    ".player-score .score-box"
+  );
+  computerScores.forEach((el, i) => {
+    if (i < currentLevel) el.classList.add("active");
+    else el.classList.remove("active");
+  });
+  playerScores.forEach((el, i) => {
+    if (i < currentStep) el.classList.add("active");
+    else el.classList.remove("active");
+  });
+};
 
 const resetGame = () => {
   currentLevel = 1;
@@ -91,14 +128,10 @@ const onSelectChange = (e: Event) => {
 };
 
 const onWinGame = () => {
-  Swal.fire(
-    'Brawo!',
-    'Wygrałeś!',
-    'success'
-  ).then(() => {
-    resetGame()
-  })
-}
+  Swal.fire("Brawo!", "Wygrałeś!", "success").then(() => {
+    resetGame();
+  });
+};
 
 const onPlayerClick = (e: Event) => {
   if (!isComputerPlay) {

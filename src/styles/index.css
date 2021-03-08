@@ -1,18 +1,23 @@
 @import "reset.css";
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-body{
-    font-family: 'Roboto', sans-serif;
+body {
+  font-family: "Roboto", sans-serif;
 }
 
-.container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    45deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 
 .wrapper {
@@ -24,14 +29,14 @@ body{
 }
 
 .computer-board {
-  background: #93A3BC;
+  background: #93a3bc;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
 
 .player-board {
-  background: #93A3BC;
+  background: #93a3bc;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -43,20 +48,20 @@ body{
 
 @keyframes anim {
   0% {
-    background-color: #93A3BC;
+    background-color: #93a3bc;
   }
   50% {
-    background-color: #0E1C86;
+    background-color: #0e1c86;
   }
   100% {
-    background-color: #93A3BC;
+    background-color: #93a3bc;
   }
 }
 
 .box {
   width: 6vw;
   height: 6vw;
-  border: 1px solid white;
+  border: 1px solid #f1f1f1;
   transition: 500ms;
 }
 
@@ -65,7 +70,7 @@ body{
 }
 
 .disable {
-  background-color: #6F584B !important;
+  background-color: #596170 !important;
   cursor: not-allowed !important;
 }
 
@@ -76,21 +81,21 @@ body{
   width: 100%;
 }
 
-.actions button{
-    border: 1px solid #93A3BC;
-    border-radius: 0;
-    background-color: transparent;
-    color: white;
-    font-size: 1.5rem;
-    padding: 1rem 2rem;
-    cursor: pointer;
-    transition: 0.5s background-color, 0.5s color;
+.actions button {
+  border: 1px solid #93a3bc;
+  border-radius: 0;
+  background-color: transparent;
+  color: #f1f1f1;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: 0.5s background-color, 0.5s color;
 }
 
-.actions button:hover{
-    background-color: #93A3BC;
-    color: black;
-    border-color: white;
+.actions button:hover {
+  background-color: #93a3bc;
+  color: black;
+  border-color: #f1f1f1;
 }
 
 .actions-btns {
@@ -101,30 +106,53 @@ body{
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
-  color: white;
+  color: #f1f1f1;
   font-size: 1.2rem;
   text-transform: uppercase;
 }
 
+.computer-score,
+.player-score {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-box {
+  margin: 0 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #f1f1f1;
+  background-color: #c4dbff;
+}
+.score-box.active {
+  background-color: #40dba5;
+}
 
 @media (max-width: 768px) {
-    .wrapper {
-      flex-direction: column;
-    }
-    .player-board {
-      margin-top: 1.5rem;
-    }
-    .box {
-      width: 12vw;
-      height: 12vw;
-      border: 1px solid white;
-      transition: 500ms;
-    }
-
-    .actions-btns{
-        margin-top: 0.5rem;
-    }
-    .actions-select{
-        margin-top: 0.5rem;
-    }
+  .wrapper {
+    flex-direction: column;
   }
+  .player-board {
+    margin-top: 1.5rem;
+  }
+  .box {
+    width: 12vw;
+    height: 12vw;
+    border: 1px solid #f1f1f1;
+    transition: 500ms;
+  }
+
+  .actions-btns {
+    margin-top: 0.5rem;
+  }
+  .actions-select {
+    margin-top: 0.5rem;
+  }
+
+  .actions button {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+  }
+}
