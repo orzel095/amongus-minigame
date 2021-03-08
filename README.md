@@ -15,3 +15,7 @@ App is running.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
+# Online version
+
+Game is also available on [https://orzel095.github.io/amongus-minigame](https://orzel095.github.io/amongus-minigame/)
+
