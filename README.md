@@ -1,4 +1,4 @@
-# amongus-miinigame
+# amongus-minigame
 
 ## Instruction
 
