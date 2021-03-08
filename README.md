@@ -1,4 +1,4 @@
-# freshmail-game
+# amongus-miinigame
 
 ## Instruction
 
