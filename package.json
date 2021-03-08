@@ -31,6 +31,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@babel/preset-typescript": "^7.13.0"
+    "@babel/preset-typescript": "^7.13.0",
+    "sweetalert2": "^10.15.5"
   }
 }

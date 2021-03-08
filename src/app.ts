@@ -3,8 +3,11 @@ import {
   getComputerCombination,
   boxAnimation,
   updateScore,
+  setPlayerBoxes,
 } from "./utils/index";
 import "./styles/index.css";
+//@ts-ignore
+import Swal from "sweetalert2";
 
 // elements
 const selectElement: HTMLSelectElement | null = document.querySelector(
@@ -12,45 +15,54 @@ const selectElement: HTMLSelectElement | null = document.querySelector(
 );
 const playBtn: HTMLButtonElement | null = document.querySelector(".play-btn");
 const resetBtn: HTMLButtonElement | null = document.querySelector(".reset-btn");
-const preview: HTMLElement | null = document.querySelector(".preview");
-const board: HTMLElement | null = document.querySelector(".board");
+const computerBoard: HTMLElement | null = document.querySelector(".computer-board");
+const playerBoard: HTMLElement | null = document.querySelector(".player-board");
 
 //setting game
 
 const gridSize: number = 4;
 let maxSteps: number = Number(selectElement?.value);
-let level = 1;
-let currentStep = 0;
+let currentLevel: number = 1;
+let currentStep: number = 0;
+let isComputerPlay = false;
 
 const boxes = getGeneratedBoxes(gridSize);
 
 boxes.forEach((node) => {
-  preview?.appendChild(node.cloneNode());
-  board?.appendChild(node.cloneNode());
+  computerBoard?.appendChild(node.cloneNode());
+  playerBoard?.appendChild(node.cloneNode());
 });
 
 let computerCombination = getComputerCombination(gridSize, maxSteps);
 
-const previewBoxes: NodeListOf<HTMLElement> = document.querySelectorAll(
-  ".preview .box"
+const computerBoxes: NodeListOf<HTMLElement> = document.querySelectorAll(
+  ".computer-board .box"
 );
-const boardBoxes: NodeListOf<HTMLElement> = document.querySelectorAll(
-  ".board .box"
+const playerBoxes: NodeListOf<HTMLElement> = document.querySelectorAll(
+  ".player-board .box"
 );
 
 // helpers
 
 const resetGame = () => {
-  level = 1;
+  currentLevel = 1;
   currentStep = 0;
   updateScore();
   computerCombination = getComputerCombination(gridSize, maxSteps);
+  isComputerPlay = false;
+  setPlayerBoxes(playerBoxes, true);
 };
 
-const showPreview = () => {
-  for (let i = 0; i < level; i++) {
+const playComputerCombination = () => {
+  isComputerPlay = true;
+  setPlayerBoxes(playerBoxes, false);
+  for (let i = 0; i < currentLevel; i++) {
     setTimeout(() => {
-      boxAnimation(previewBoxes[computerCombination[i]]);
+      isComputerPlay && boxAnimation(computerBoxes[computerCombination[i]]);
+      if (i === currentLevel - 1) {
+        isComputerPlay = false;
+        setPlayerBoxes(playerBoxes, true);
+      }
     }, (i + 1) * 500);
     updateScore();
   }
@@ -62,8 +74,8 @@ const updateStep = () => {
 };
 
 const updateLevel = () => {
-  level++;
-  showPreview();
+  currentLevel++;
+  playComputerCombination();
   updateScore();
   setTimeout(() => {
     currentStep = 0;
@@ -75,34 +87,47 @@ const onSelectChange = (e: Event) => {
   const { value } = e.target as HTMLSelectElement;
   computerCombination = getComputerCombination(gridSize, Number(value));
   maxSteps = Number(value);
+  resetGame();
 };
 
-const onBoxClick = (e: Event) => {
-  const { target } = e;
-  const box = target as HTMLElement;
-  const index: number = Number(box.dataset.index);
-  if (computerCombination[currentStep] === index) {
-    updateStep();
-    boxAnimation(box);
-    if (level === currentStep && level === maxSteps) {
-      alert("win");
-      return false;
+const onWinGame = () => {
+  Swal.fire(
+    'Brawo!',
+    'Wygrałeś!',
+    'success'
+  ).then(() => {
+    resetGame()
+  })
+}
+
+const onPlayerClick = (e: Event) => {
+  if (!isComputerPlay) {
+    const { target } = e;
+    const box = target as HTMLElement;
+    const index: number = Number(box.dataset.index);
+    if (computerCombination[currentStep] === index) {
+      updateStep();
+      boxAnimation(box);
+      if (currentLevel === currentStep && currentLevel === maxSteps) {
+        onWinGame();
+        return false;
+      }
+      if (currentLevel === currentStep) {
+        updateLevel();
+      }
+    } else {
+      currentStep = 0;
+      updateScore();
+      playComputerCombination();
     }
-    if (level === currentStep) {
-      updateLevel();
-    }
-  } else {
-    currentStep = 0;
-    updateScore();
-    showPreview();
   }
 };
 
 // events
 
-playBtn?.addEventListener("click", showPreview);
+playBtn?.addEventListener("click", onPlayerClick);
 resetBtn?.addEventListener("click", resetGame);
 selectElement?.addEventListener("change", onSelectChange);
-boardBoxes.forEach((box) => {
-  box.addEventListener("click", onBoxClick);
+playerBoxes.forEach((box) => {
+  box.addEventListener("click", onPlayerClick);
 });

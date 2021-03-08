@@ -45,3 +45,16 @@ export const boxAnimation = (element: HTMLElement) => {
     element.classList.remove("anim");
   }, 450);
 };
+
+export const setPlayerBoxes = (
+  boxes: NodeListOf<HTMLElement>,
+  isEnable: boolean
+) => {
+  boxes.forEach((box) => {
+    if (!isEnable) {
+      box.classList.add("disable");
+    } else {
+      box.classList.remove("disable");
+    }
+  });
+};

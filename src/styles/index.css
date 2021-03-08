@@ -1,61 +1,130 @@
 @import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+}
 
 .wrapper {
-  background-color: pink;
   padding: 2rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
 }
 
-.preview {
-  background: gray;
+.computer-board {
+  background: #93A3BC;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
 
-.board {
-  background: gray;
+.player-board {
+  background: #93A3BC;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
 
-.board .box {
+.player-board .box {
   cursor: pointer;
 }
 
 @keyframes anim {
   0% {
-    background-color: gray;
+    background-color: #93A3BC;
   }
   50% {
-    background-color: blue;
+    background-color: #0E1C86;
   }
   100% {
-    background-color: gray;
+    background-color: #93A3BC;
   }
 }
 
 .box {
-  width: 3rem;
-  height: 3rem;
+  width: 6vw;
+  height: 6vw;
   border: 1px solid white;
-  transition: 200ms;
+  transition: 500ms;
 }
 
 .anim {
   animation: anim 500ms;
 }
 
-.actions{
-    display: flex;
-    align-items: center;
-    width: 100%;
+.disable {
+  background-color: #6F584B !important;
+  cursor: not-allowed !important;
 }
 
-.actions-btns{
-    margin-left: auto;
+.actions {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
+
+.actions button{
+    border: 1px solid #93A3BC;
+    border-radius: 0;
+    background-color: transparent;
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: 0.5s background-color, 0.5s color;
+}
+
+.actions button:hover{
+    background-color: #93A3BC;
+    color: black;
+    border-color: white;
+}
+
+.actions-btns {
+  margin-top: 1.5rem;
+}
+
+.actions-select {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+
+@media (max-width: 768px) {
+    .wrapper {
+      flex-direction: column;
+    }
+    .player-board {
+      margin-top: 1.5rem;
+    }
+    .box {
+      width: 12vw;
+      height: 12vw;
+      border: 1px solid white;
+      transition: 500ms;
+    }
+
+    .actions-btns{
+        margin-top: 0.5rem;
+    }
+    .actions-select{
+        margin-top: 0.5rem;
+    }
+  }
